@@ -9,16 +9,14 @@ real drama
 
 Using PHP and jQuery, `pixelfies` pixelates and showcase selfies from friends and strangers who submit. I love selfies and pixel art, so why the hell not!
 
-## Send me your selfies
+## Don't send me your selfies
 
-* via email [jenn@pancaketheorem.com](mailto:jenn@pancaketheorem.com) 
-* via twitter [@jennschiffer](http://twitter.com/jennschiffer)
-* or via pull request here!
+I used to take selfies to add to the random gallery, but – much like time itself – that offer has passed.
 
-## If sending via pull request
+## Create your own selfies
 
-1. image must be 50x50 pixels and png type
-2. make sure the mode is rgb
-3. all you need to do is add the image to the selfies directory, no code necessary
+Go to http://pixelfies.us/[YOUR TWITTER HANDLE GOES HERE]. Example: [http://pixelfies.us/jennschiffer](http://pixelfies.us/jennschiffer) is mine!
 
-xoxo j$
+If your Twitter avatar isn't a selfie, you should feel bad. jk I love you.
+
+xoxo [j$](http://twitter.com/jennschiffer)
