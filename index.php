@@ -93,7 +93,7 @@
     real drama</p>
     <div id="controls">
     <p>
-      @ <input type="text" placeholder="enter twitter username" id="twitter-handle" name="twitter-handle" />
+      @<input type="text" placeholder="enter twitter username" id="twitter-handle" name="twitter-handle" />
       <input type="submit" value="get #pixelfie" id="submit-twitter-handle" />
     </p>
     <?php if ( !$hidePixelfies ) { ?>
@@ -318,7 +318,7 @@ $(function(){
 
 <!-- just some analytics, whatever -->
 <script src="//pmetrics.performancing.com/js" type="text/javascript"></script>
-<script type="text/javascript">try{ clicky.init(14721); }catch(e){}</script>
-<noscript><p><img alt="Performancing Metrics" width="1" height="1" src="//pmetrics.performancing.com/14721ns.gif" /></p></noscript>
+<script type="text/javascript">try{ clicky.init(23331); }catch(e){}</script>
+<noscript><p><img alt="Performancing Metrics" width="1" height="1" src="//pmetrics.performancing.com/23331ns.gif" /></p></noscript>
 </body>
 </html>
