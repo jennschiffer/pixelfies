@@ -1,0 +1,17 @@
+body { position: relative; font-family: monospace; text-align: center; }
+a { color: blue; }
+#gallery { display: inline-block; width: auto; margin: 10px; position: relative; text-align: center; width: 100%; max-width: 800px; }  
+#about-this-thing { width: 175px; float: right; text-align: right; z-index: 100000000; font-weight: bold; padding: 10px; margin-top: 10px;  background: rgba(255,255,255,.2); }
+#about-this-thing a { color: #000; }
+#about-this-thing em { font-weight: normal; font-style: italic; }
+.pixel { width: 12px; height: 12px; float: left; }
+.break { width: 0; height: 0;  clear: both; }  
+#pixelfies { width: 588px; height: 588px; padding: 0; margin: 10px 0; background: turquoise url('assets/hourglass.gif') no-repeat center center; }
+.pixelfie { display:none; position: relative; float: left; }
+.model { position: absolute; bottom: 12px; left: 12px; background: #fff; padding: 5px; font-size: 2em; text-transform: uppercase; }
+
+@media (max-width: 800px) { 
+  #gallery { width: 588px; margin: 0 auto; display: block; }
+  #about-this-thing { width: 100%; max-width: 568px; float: none; margin: 0 0 10px; display: block; text-align: center; }
+  #pixelfies { float: none; margin: 0 auto; text-align: center; }
+}
