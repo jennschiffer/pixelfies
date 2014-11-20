@@ -27,7 +27,7 @@
   $twitterUser = parseURL();
 
   if ( !$twitterUser ) {
-	$twitterUser = strip_tags( $_GET['twitter'] );
+  $twitterUser = strip_tags( $_GET['twitter'] );
   }
   
   if ( $twitterUser ) {
@@ -92,10 +92,10 @@
     real selfies<br />
     real drama</p>
     <div id="controls">
-	  <p>
-	    @ <input type="text" placeholder="enter twitter username" id="twitter-handle" name="twitter-handle" />
-	    <input type="submit" value="get #pixelfie" id="submit-twitter-handle" />
-	  </p>
+    <p>
+      @ <input type="text" placeholder="enter twitter username" id="twitter-handle" name="twitter-handle" />
+      <input type="submit" value="get #pixelfie" id="submit-twitter-handle" />
+    </p>
     <?php if ( !$hidePixelfies ) { ?>
       <p>You're viewing the original #pixelfies babes gallery, lucky you!</p>
       <button id="random">get random #pixelfie</button>
@@ -103,7 +103,7 @@
     <?php }
     else { ?>
       <p>
-	    <p><a href="/">Click here to check out the original #pixelfies babes!</a></p>
+      <p><a href="/">Click here to check out the original #pixelfies babes!</a></p>
         <button id="save-pixelfie">Save Your Pixelfie!</button>
         <p>#<span id="hex">ffffff</span></p>
       </p>
@@ -197,7 +197,7 @@ $(function(){
     var $currentPixelfiePixels = $currentPixelfie.find('.pixel');
     $body.removeAttr('class').addClass($currentPixelfieId);
     
-    bindPixelMouseover();
+    bindBGPixelMouseover();
   };
   
   // get rgb from image data
@@ -207,8 +207,15 @@ $(function(){
   };
   
   // rgb to hex
-  var rgbToHex = function( rgb ) {
-    var rgbArray = rgb.substr(4, rgb.length - 5).split(',');
+  var rgbToHex = function( rgb, includesAlpha ) {
+    var rgbArray;
+    
+    if ( includesAlpha ) {
+	  rgbArray = rgb.substr(5, rgb.length - 5).split(',');
+    }
+    else {
+	  rgbArray = rgb.substr(4, rgb.length - 5).split(',');
+    }
     var hex = "";
     for ( var i = 0; i <= 2; i++ ) {
       var hexUnit = parseInt(rgbArray[i]).toString(16);
@@ -220,15 +227,16 @@ $(function(){
     return hex;
   };
   
-  // background change on hover
-  var bindPixelMouseover = function() {
+  // background change on hover - PHP
+  var bindBGPixelMouseover = function() {
     $('.current').find('.pixel').on('mouseover', function(e){
       loopOn = false;
       var newColor = $(this).css('background-color');
       $body.css('background-color', newColor );
-      $hex.text( rgbToHex(newColor) );
+      $hex.text( rgbToHex(newColor, false) );
     });
   };
+ 
   
   // TODO background change on click
   
@@ -258,37 +266,47 @@ $(function(){
   
   // only do this if there is an avatar URL
   if ( avatarBase64 != '' ) { 
-   var $twixelfie = $('#twixelfie');
-   var ctx = $twixelfie[0].getContext('2d');
-   var twixelfie = new Image();
-   twixelfie.src = avatarBase64;
-   twixelfie.onload = function(){
+    var $twixelfie = $('#twixelfie');
+    var ctx = $twixelfie[0].getContext('2d');
+    var twixelfie = new Image();
+    twixelfie.src = avatarBase64;
+    twixelfie.onload = function(){
      
-    var coordX = 0,
-     coordY = 0,
-   pixelSize = 12;
+      var coordX = 0,
+          coordY = 0,
+          pixelSize = 12;
    
-  // get image on memory canvas so we can grab data
-     var memoryCanvas = document.createElement('canvas');
-     var memoryCtx = memoryCanvas.getContext('2d');
-     memoryCtx.drawImage(twixelfie,0,0);
+      // get image on memory canvas so we can grab data
+      var memoryCanvas = document.createElement('canvas');
+      var memoryCtx = memoryCanvas.getContext('2d');
+      memoryCtx.drawImage(twixelfie,0,0);
     
-    // for each row draw pixel at y+i
-    for ( var x = 0; x < 48; x++ ) {
-      for ( var y = 0; y < 48; y++ ) {
-        var pixelData = memoryCtx.getImageData(x,y,1,1).data;
-        var pixelRGB = getRGBColor(pixelData);
+      // for each row draw pixel at y+i
+      for ( var x = 0; x < 48; x++ ) {
+        for ( var y = 0; y < 48; y++ ) {
+          var pixelData = memoryCtx.getImageData(x,y,1,1).data;
+          var pixelRGB = getRGBColor(pixelData);
     
-        //draw rect
-        ctx.fillStyle = pixelRGB;
-        ctx.fillRect(coordX,coordY,pixelSize,pixelSize);
+          //draw rect
+          ctx.fillStyle = pixelRGB;
+          ctx.fillRect(coordX,coordY,pixelSize,pixelSize);
 
-        coordY = coordY + pixelSize;
+          coordY = coordY + pixelSize;
+        }
+        coordY = 0;
+        coordX = coordX + pixelSize;
       }
-      coordY = 0;
-      coordX = coordX + pixelSize;
-    }
-   };
+    
+      // bind mouseover for color picker
+      $twixelfie.mousemove(function(e) {
+	    var parentOffset = $(this).parent().offset(); 
+        var pixelData = ctx.getImageData(e.pageX - parentOffset.left, e.pageY - parentOffset.top,1,1).data;
+        var newColor = getRGBColor(pixelData);
+  
+        $body.css('background-color', newColor );
+        $hex.text( rgbToHex(newColor, true) );
+      });
+    };
   } 
   else {
     // init rando babes

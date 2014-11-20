@@ -9,6 +9,7 @@ a { color: blue; }
 #pixelfies { width: 588px; height: 588px; padding: 0; margin: 10px 0; background: turquoise url('assets/hourglass.gif') no-repeat center center; }
 .pixelfie { display:none; position: relative; float: left; }
 .model { position: absolute; bottom: 12px; left: 12px; background: #fff; padding: 5px; font-size: 2em; text-transform: uppercase; }
+#twixelfies { position: relative;}
 
 @media (max-width: 800px) { 
   #gallery { width: 588px; margin: 0 auto; display: block; }
