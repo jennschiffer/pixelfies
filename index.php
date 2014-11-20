@@ -91,24 +91,32 @@
     <p>real people<br />
     real selfies<br />
     real drama</p>
-    <p>made by<br /><a href="http://twitter.com/jennschiffer">@jennschiffer</a></p>
     <div id="controls">
-    <?php if ( !$hidePixelfies ) { ?> 
-      <button id="random">random pixelfie</button>
+	  <p>
+	    @ <input type="text" placeholder="enter twitter username" id="twitter-handle" name="twitter-handle" />
+	    <input type="submit" value="get #pixelfie" id="submit-twitter-handle" />
+	  </p>
+    <?php if ( !$hidePixelfies ) { ?>
+      <p>You're viewing the original #pixelfies babes gallery, lucky you!</p>
+      <button id="random">get random #pixelfie</button>
       <p>#<span id="hex">ffffff</span></p>
     <?php }
     else { ?>
       <p>
-        <input type="submit" value="Save Your Pixelfie!" id="save-pixelfie" />
+	    <p><a href="/">Click here to check out the original #pixelfies babes!</a></p>
+        <button id="save-pixelfie">Save Your Pixelfie!</button>
+        <p>#<span id="hex">ffffff</span></p>
       </p>
   <?php } ?>
     </div>
+    
+    <p class="credit">made by<br /><a href="http://twitter.com/jennschiffer">@jennschiffer</a></p>
+
   </div>
 
     <?php
     /*** NOT A TWITTER REQUEST, SO SHOW RANDO BABES OH YEAHHHH ***/
   if ( !$hidePixelfies ) { ?>
-   <!-- <p>blah blah something about twitter handle</p>-->
 
     <div id="pixelfies" class="<?php echo $galleryClass; ?>">
       <?php
@@ -139,9 +147,7 @@
     ?>
   
     <div id="twixelfies">
-    <p><a href="/">Check out the original #pixelfies babes!</a></p>
-
-    <canvas id="twixelfie" width="576" height="576">Your browser doesn't support canvas >:/</canvas>
+     <canvas id="twixelfie" width="576" height="576">Your browser doesn't support canvas >:/</canvas>
     </div>
   
     <?php } ?>
@@ -159,6 +165,8 @@ $(function(){
   $buttonRandom = $('#random'),
   $alert = $('#alert'),
   $hex = $('#hex'),
+  $twitterHandle = $('#twitter-handle'),
+  $submitTwitterHandleButton = $('#submit-twitter-handle'),
   $saveButton = $('#save-pixelfie');
   
   var avatarBase64 = '<?php echo $avatarBase64; ?>';   
@@ -238,6 +246,11 @@ $(function(){
   $saveButton.click(function(){
     var img = $twixelfie[0].toDataURL('image/png');
     window.open(img, '_blank');
+  });
+  
+  // get twitter pixelfie on button click
+  $submitTwitterHandleButton.click(function(){
+    window.open('/' + $twitterHandle.val(), '_self');
   });
     
     
