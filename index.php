@@ -1,5 +1,5 @@
 <?php
-  $twitterUser = $_GET['twitter'];
+  $twitterUser = strip_tags( $_GET['twitter'] );
   
   if ( $twitterUser ) {
    
@@ -18,7 +18,7 @@
 
     $result = json_decode($json);
     $avatarURL = $result->profile_image_url;
-  
+ 
     $data = file_get_contents($avatarURL);
     $avatarBase64 = 'data:image/png;base64,' . base64_encode($data);
     
@@ -135,9 +135,9 @@ $(function(){
   var avatarBase64 = '<?php echo $avatarBase64; ?>';   
   
   var galleryClass = $gallery.attr('class'),
-  index = -1,
-  colorFlashMode
-  loopOn = true;
+    index = -1,
+    colorFlashMode
+    loopOn = true;
   
   // get random index but never same two in a row
   var getRandomIndex = function() {
@@ -174,11 +174,11 @@ $(function(){
     var rgbArray = rgb.substr(4, rgb.length - 5).split(',');
     var hex = "";
     for ( var i = 0; i <= 2; i++ ) {
-  var hexUnit = parseInt(rgbArray[i]).toString(16);
-  if ( hexUnit.length == 1 ) {
-    hexUnit = '0' + hexUnit;
-  }
-  hex += hexUnit;
+      var hexUnit = parseInt(rgbArray[i]).toString(16);
+      if ( hexUnit.length == 1 ) {
+        hexUnit = '0' + hexUnit;
+      }
+      hex += hexUnit;
     }
     return hex;
   };
@@ -186,10 +186,10 @@ $(function(){
   // background change on hover
   var bindPixelMouseover = function() {
     $('.current').find('.pixel').on('mouseover', function(e){
-  loopOn = false;
-  var newColor = $(this).css('background-color');
-  $body.css('background-color', newColor );
-  $hex.text( rgbToHex(newColor) );
+      loopOn = false;
+      var newColor = $(this).css('background-color');
+      $body.css('background-color', newColor );
+      $hex.text( rgbToHex(newColor) );
     });
   };
   
@@ -233,25 +233,24 @@ $(function(){
     
     // for each row draw pixel at y+i
     for ( var x = 0; x < 48; x++ ) {
-  for ( var y = 0; y < 48; y++ ) {
-    var pixelData = memoryCtx.getImageData(x,y,1,1).data;
-    var pixelRGB = getRGBColor(pixelData);
+      for ( var y = 0; y < 48; y++ ) {
+        var pixelData = memoryCtx.getImageData(x,y,1,1).data;
+        var pixelRGB = getRGBColor(pixelData);
     
-    //draw rect
-    ctx.fillStyle = pixelRGB;
-    ctx.fillRect(coordX,coordY,pixelSize,pixelSize);
+        //draw rect
+        ctx.fillStyle = pixelRGB;
+        ctx.fillRect(coordX,coordY,pixelSize,pixelSize);
 
-  coordY = coordY + pixelSize;
-  }
-  coordY = 0;
-  coordX = coordX + pixelSize;
+        coordY = coordY + pixelSize;
+      }
+      coordY = 0;
+      coordX = coordX + pixelSize;
     }
    };
-   
   } 
   else {
-  // init rando babes
-  showRandomPixelfie(); 
+    // init rando babes
+    showRandomPixelfie(); 
   }
      
 });
