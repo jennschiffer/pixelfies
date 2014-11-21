@@ -198,6 +198,7 @@ $(function(){
     $body.removeAttr('class').addClass($currentPixelfieId);
     
     bindBGPixelMouseover();
+    bindBGPixelClick();
   };
   
   // get rgb from image data
@@ -237,8 +238,12 @@ $(function(){
     });
   };
  
-  
-  // TODO background change on click
+  var bindBGPixelClick = function() {
+	$('.current').find('.pixel').on('click', function(e){
+	  var newColor = $(this).css('background-color');
+	  window.prompt('Ooh what a pretty color!', '#' + rgbToHex(newColor, false) );
+	});  
+  }
   
   var showRandomPixelfie = function() {
   var currentPixels = $('.current').find('.pixel');
@@ -305,6 +310,14 @@ $(function(){
   
         $body.css('background-color', newColor );
         $hex.text( rgbToHex(newColor, true) );
+      });
+      
+      $twixelfie.click(function(e) {
+	    var parentOffset = $(this).parent().offset(); 
+        var pixelData = ctx.getImageData(e.pageX - parentOffset.left, e.pageY - parentOffset.top,1,1).data;
+        var newColor = getRGBColor(pixelData);
+  
+        window.prompt('Ooh what a pretty color!', '#' + rgbToHex(newColor, true) );
       });
     };
   } 

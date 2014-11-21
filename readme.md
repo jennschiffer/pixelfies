@@ -15,7 +15,7 @@ I used to take selfies to add to the random gallery, but – much like time itse
 
 ## Create your own selfies
 
-Go to http://pixelfies.us/[YOUR TWITTER HANDLE GOES HERE]. Example: [http://pixelfies.us/jennschiffer](http://pixelfies.us/jennschiffer) is mine!
+Go to http://pixelfies.us/YOURTWITTERHANDLE. Example: [http://pixelfies.us/jennschiffer](http://pixelfies.us/jennschiffer) is mine!
 
 If your Twitter avatar isn't a selfie, you should feel bad. jk I love you.
 
